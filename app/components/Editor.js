@@ -3,6 +3,7 @@ import React from "react";
 import ReactMde from "react-mde";
 import Showdown from "showdown";
 import propTypes from "prop-types";
+import "react-mde/lib/styles/css/react-mde-all.css";
 
 function Editor({ tempNoteText, setTempNoteText }) {
     // Define PropTypes for the component's props
