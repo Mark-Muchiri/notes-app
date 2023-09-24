@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import "./page.css";
-// import "./App.css";
+import { Karla } from "next/font/google";
 import React from "react";
 import Sidebar from "./components/Sidebar";
 import Editor from "./components/Editor";
@@ -9,7 +8,14 @@ import Split from "react-split";
 import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 import { notesCollection, db } from "./firebase.js";
 
+// Global fonts
+const karla = Karla({
+  subsets: [ 'latin', 'latin-ext' ],
+  weight: [ '400', '700' ],
+});
+
 function Home() {
+
   // Define state variables for notes and the current selected note ID
   const [ notes, setNotes ] = React.useState([]);
   const [ currentNoteId, setCurrentNoteId ] = React.useState("");
@@ -80,14 +86,23 @@ function Home() {
 
   // Function to update the content of the current note
   async function updateNote(text) {
-    const docRef = doc(db, "notes", currentNoteId);
-    // Update the note document in Firebase with the new content
-    await setDoc(
-      docRef,
-      { body: text, updatedAt: Date.now() },
-      { merge: true }
-    );
+    /**
+     * Note => Added the if condition
+     * This modification ensures that you only attempt to create a 
+     * document reference and update the document if currentNoteId 
+     * is defined, preventing the "Invalid document reference" error.
+     */
+    if (currentNoteId) {
+      const docRef = doc(db, "notes", currentNoteId);
+      // Update the note document in Firebase with the new content
+      await setDoc(
+        docRef,
+        { body: text, updatedAt: Date.now() },
+        { merge: true }
+      );
+    }
   }
+
 
   // Function to delete a note
   async function deleteNote(noteId) {
@@ -97,7 +112,7 @@ function Home() {
   }
 
   return (
-    <main>
+    <main className={karla.className}>
       {
         // Check if there are any notes to display
         notes.length > 0 ? (
