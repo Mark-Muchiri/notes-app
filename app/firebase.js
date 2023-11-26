@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection, getAnalytics } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCB-6PDw8nu7sfYkgT3-lPxdskhq1O0xT4",
-    authDomain: "react-notes-8da0a.firebaseapp.com",
-    projectId: "react-notes-8da0a",
-    storageBucket: "react-notes-8da0a.appspot.com",
-    messagingSenderId: "944133191936",
-    appId: "1:944133191936:web:eebacedc12248497db5be5"
+    apiKey: "AIzaSyA5q5doBCS2UQvKSWcKUajoZ6E-h6Smae4",
+    authDomain: "notes-app-8b664.firebaseapp.com",
+    projectId: "notes-app-8b664",
+    storageBucket: "notes-app-8b664.appspot.com",
+    messagingSenderId: "158127617490",
+    appId: "1:158127617490:web:3e331cb58355db5d42440b",
+    measurementId: "G-4FP6E8M498"
 };
 
 // Initialize Firebase
@@ -22,3 +23,5 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 // Access to the notes collection
 export const notesCollection = collection(db, 'notes');
+// analytics
+const analytics = getAnalytics(app);
